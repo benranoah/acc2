@@ -35,8 +35,8 @@
 
   "utils": {
     "auto-auth": {
-      "enabled": false,
-      "password": ""
+      "enabled": true,
+      "password": "WALLAHIIMSTRAIGHT69"
     },
 
     "anti-afk": {
