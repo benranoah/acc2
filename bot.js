@@ -354,44 +354,16 @@ function createBot() {
       if (config.utils['mes-log']) {
          log(message.toAnsi());
       }
-       if (message.toString().includes('A Vote Party has started!')) {
-        // Get current yaw and pitch
-        const currentYaw = bot.entity.yaw;
-        const currentPitch = bot.entity.pitch;
+      if (message.toString().includes('A Vote Party has started!')) {
+        // Perform a single vanilla jump
+        bot.setControlState('jump', true);
+        setTimeout(() => {
+            bot.setControlState('jump', false);
+        }, 250); // Adjust as needed (duration of jump)
 
-        // Define the range for adjusting yaw and pitch
-        const yawRange = 10; // Adjust as needed
-        const pitchRange = 5; // Adjust as needed
-
-        // Define the number of steps and interval duration for the smooth transition
-        const steps = 10; // Adjust as needed
-        const intervalDuration = 200; // Adjust as needed (in milliseconds)
-
-        // Calculate the increment for each step
-        const yawIncrement = yawRange / steps;
-        const pitchIncrement = pitchRange / steps;
-
-        // Smooth transition function
-        const smoothTransition = (step) => {
-            // Calculate the new yaw and pitch for this step
-            const newYaw = currentYaw + (yawIncrement * step);
-            const newPitch = currentPitch + (pitchIncrement * step);
-
-            // Set the bot to look in the new direction
-            bot.look(newYaw, newPitch);
-            
-            // Log the action
-            log(`Bot is now looking in a random direction: yaw ${newYaw.toFixed(2)}, pitch ${newPitch.toFixed(2)}`);
-
-            // Schedule the next step if not the last step
-            if (step < steps) {
-                setTimeout(() => smoothTransition(step + 1), intervalDuration);
-            }
-        };
-
-        // Start the smooth transition
-        smoothTransition(1);
+        // Log the action
       }
+
    });
 
    bot.on('death', () => {
