@@ -354,6 +354,14 @@ function createBot() {
       if (config.utils['mes-log']) {
          log(message.toAnsi());
       }
+       if (message.toString().includes('A Vote Party has started!')) {
+        // Generate random yaw and pitch values
+        const randomYaw = Math.random() * 360;
+        const randomPitch = Math.random() * 90 - 45; // Pitch is usually between -90 to 90
+
+        // Set the bot to look in the random direction
+        bot.look(randomYaw, randomPitch);
+       }
    });
 
    bot.on('death', () => {
