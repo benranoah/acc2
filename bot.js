@@ -355,13 +355,43 @@ function createBot() {
          log(message.toAnsi());
       }
        if (message.toString().includes('A Vote Party has started!')) {
-        // Generate random yaw and pitch values
-        const randomYaw = Math.random() * 360;
-        const randomPitch = Math.random() * 90 - 45; // Pitch is usually between -90 to 90
+        // Get current yaw and pitch
+        const currentYaw = bot.entity.yaw;
+        const currentPitch = bot.entity.pitch;
 
-        // Set the bot to look in the random direction
-        bot.look(randomYaw, randomPitch);
-       }
+        // Define the range for adjusting yaw and pitch
+        const yawRange = 10; // Adjust as needed
+        const pitchRange = 5; // Adjust as needed
+
+        // Define the number of steps and interval duration for the smooth transition
+        const steps = 10; // Adjust as needed
+        const intervalDuration = 200; // Adjust as needed (in milliseconds)
+
+        // Calculate the increment for each step
+        const yawIncrement = yawRange / steps;
+        const pitchIncrement = pitchRange / steps;
+
+        // Smooth transition function
+        const smoothTransition = (step) => {
+            // Calculate the new yaw and pitch for this step
+            const newYaw = currentYaw + (yawIncrement * step);
+            const newPitch = currentPitch + (pitchIncrement * step);
+
+            // Set the bot to look in the new direction
+            bot.look(newYaw, newPitch);
+            
+            // Log the action
+            log(`Bot is now looking in a random direction: yaw ${newYaw.toFixed(2)}, pitch ${newPitch.toFixed(2)}`);
+
+            // Schedule the next step if not the last step
+            if (step < steps) {
+                setTimeout(() => smoothTransition(step + 1), intervalDuration);
+            }
+        };
+
+        // Start the smooth transition
+        smoothTransition(1);
+      }
    });
 
    bot.on('death', () => {
