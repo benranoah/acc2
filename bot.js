@@ -40,33 +40,12 @@ function createBot() {
    const bot = mineflayer.createBot({
       username: config['bot-account']['username'],
       password: config['bot-account']['password'],
-      host: ip[0],
       auth: config['bot-account']['type'],
+      host: ip[0],
+      port: ip[1],
       version: config.server.version,
-      connect: (client) => {
-         socks.createConnection({
-            proxy: {
-               host: proxyHost,
-               port: parseInt(proxyPort),
-               userId: proxyUsername,
-               type: 5,
-               password: proxyPassword
-            },
-            command: 'connect',
-            destination: {
-               host: ip[0],
-               port: parseInt(ip[1]),
-            }
-         }, (err, info) => {
-            if (err) {
-               console.log(err)
-               return
-            }
-            client.setSocket(info.socket)
-            client.emit('connect')
-         });
-      }
    });
+
 
 
    bot.on('login', () => {
@@ -89,7 +68,7 @@ function createBot() {
                setTimeout(() => {
                   bot.chat(`/login ${password}`); // Sends the command "/login" again after another 10 seconds
                   setTimeout(() => {
-                     bot.chat(`/skypvp`); // Sends the command "/skypvp" after another 10 seconds
+                     bot.chat(`/server opfactions`); // Sends the command "/skypvp" after another 10 seconds
                   }, 10000); // 10000 milliseconds = 10 seconds
                }, 10000); // 10000 milliseconds = 10 seconds
             }, 10000); // 10000 milliseconds = 10 seconds
