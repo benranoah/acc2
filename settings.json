@@ -1,12 +1,12 @@
 {
   "bot-account": {
-    "username": "benranoah1@outlook.com",
-    "password": "WALLAHIIMSTRAIGHT69",
-    "type": "microsoft"
+    "username": "PrimeIsTrash",
+    "password": "",
+    "type": "offline"
   },
 
   "server": {
-    "ip": "0bc9dece-65e6-4fff-9c6b-09a38aac703d.shield.neoprotect.ovh:25565",
+    "ip": "pika.host",
     "version": "1.8.9"
   },
 
@@ -36,7 +36,7 @@
   "utils": {
     "auto-auth": {
       "enabled": true,
-      "password": "WALLAHIIMSTRAIGHT69"
+      "password": "123ab"
     },
 
     "anti-afk": {
@@ -76,8 +76,8 @@
       "repeat-delay": 300,
 
       "messages": [
-        "/skypvp",
-        "/blocks"
+        "/server opfactions",
+        "/home"
       ]
     },
 
